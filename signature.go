@@ -1,8 +1,6 @@
 package crypto
 
-import (
-	"github.com/nknorg/crypto/signature"
-)
+import "github.com/nknorg/crypto/sig"
 
 type SIGALGO uint32
 
@@ -12,14 +10,14 @@ const (
 )
 
 var (
-	sigAlgoes = make(map[SIGALGO]func() (*signature.Keypair, error), 0)
+	sigAlgoes = make(map[SIGALGO]func() (*sig.Keypair, error), 0)
 )
 
-func (sig SIGALGO) New() (*signature.Keypair, error) {
-	return sigAlgoes[sig]()
+func (sa SIGALGO) New() (*sig.Keypair, error) {
+	return sigAlgoes[sa]()
 }
 
 func init() {
-	sigAlgoes[P256R1] = signature.NewP256R1
-	sigAlgoes[ED25519] = signature.NewED25519
+	sigAlgoes[P256R1] = sig.NewP256R1
+	sigAlgoes[ED25519] = sig.NewED25519
 }

@@ -1,4 +1,4 @@
-package signature
+package sig
 
 type PubKey interface {
 	EqualTo(pk PubKey) bool
@@ -7,7 +7,6 @@ type PubKey interface {
 	Marshal() ([]byte, error)
 	Unmarshal(data []byte) error
 	Verify(data []byte, signature []byte) error
-	//ToAddress() string
 }
 
 type PrivKey interface {
